@@ -5,6 +5,20 @@ for Godot 4.6.3, with opinionated defaults that I believe
 lead to a more ergonomic experience when bootstrapping new
 games from the void.
 
+## Using This Template
+
+To start a new project from this repository:
+
+1. Create a new repository from this template, clone it, or copy the folder.
+2. Rename the project in `project.godot` under `application/config/name`.
+3. Open Godot's Project Manager, choose Import, and select this folder or its
+   `project.godot` file.
+4. Press Play. The default main scene is `res://app/boot/boot.tscn`.
+
+The boot scene is intentionally minimal. Replace it with a menu, prototype
+level, loading screen, or scene-router handoff when the project has a real
+entry point.
+
 ## Project Structure
 
 The template uses top-level folders for ownership, not file type. Godot

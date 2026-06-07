@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="New Godot Project"
+config/name="CleanGD Template"
+run/main_scene="res://app/boot/boot.tscn"
 run/print_header=false
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/show_image=false
