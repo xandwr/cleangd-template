@@ -16,10 +16,10 @@ static func capture() -> PlayerInputFrame:
 
 
 ## Hand-constructable frame for headless tests, no Input device required.
-static func make(move_dir: Vector2, sprint: bool = false, crouch: bool = false, jump: bool = false) -> PlayerInputFrame:
+static func make(new_move_dir: Vector2, new_sprint: bool = false, new_crouch: bool = false, new_jump: bool = false) -> PlayerInputFrame:
 	var frame := PlayerInputFrame.new()
-	frame.move_dir = move_dir
-	frame.sprint = sprint
-	frame.crouch = crouch
-	frame.jump = jump
+	frame.move_dir = new_move_dir
+	frame.sprint = new_sprint
+	frame.crouch = new_crouch
+	frame.jump = new_jump
 	return frame

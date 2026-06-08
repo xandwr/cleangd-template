@@ -43,7 +43,7 @@ static func _collision_capsule(t: MovementTuning) -> CollisionShape3D:
 	return collider
 
 
-static func _camera(t: MovementTuning) -> PlayerCamera:
+static func _camera(_t: MovementTuning) -> PlayerCamera:
 	var cam := PlayerCamera.new()
 	cam.name = "PlayerCamera"
 	cam.position.y = 1.6 # eye height
