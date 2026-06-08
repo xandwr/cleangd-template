@@ -2,7 +2,8 @@ class_name PlayerBodyController extends CharacterBody3D
 
 @export var walk_speed: float = 3.5
 @export var run_speed: float = 6.5
-@export var jump_force: float = 4.5
+@export var crouch_speed: float = 1.5
+@export var jump_force: float = 5.0
 @export var standing_height: float = 1.8
 @export var crouch_height: float = 1.0
 @export var crouch_down_speed_multiplier: float = 2.0 ## how much faster crouch is than stand
@@ -24,8 +25,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	move_input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	move_world_dir = Vector3(move_input_dir.x, 0.0, move_input_dir.y) * basis.inverse()
-	current_speed = run_speed if Input.is_action_pressed("move_sprint") else walk_speed
+	current_speed = lerp(current_speed, run_speed, 8 * delta) if Input.is_action_pressed("move_sprint") else lerp(current_speed, walk_speed, 8 * delta)
 	is_crouching = true if Input.is_action_pressed("move_crouch") else false
+	current_speed = lerp(current_speed, crouch_speed, 8 * delta) if is_crouching else current_speed
 	current_height = lerp(current_height, crouch_height, 8 * delta * crouch_down_speed_multiplier) if is_crouching else lerp(current_height, standing_height, 8 * delta)
 	collider.shape.height = current_height
 
