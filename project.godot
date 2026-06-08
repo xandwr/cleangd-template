@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="CleanGD Template"
+config/name="xandbox"
+config/description="a sandbox game"
 run/main_scene="res://app/boot/boot.tscn"
 run/print_header=false
 config/features=PackedStringArray("4.6", "Forward Plus")
@@ -89,7 +90,7 @@ common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
 jolt_physics_3d/simulation/velocity_steps=14
 jolt_physics_3d/simulation/position_steps=4
-3d/default_gravity=15.399999999999999
+3d/default_gravity=15.4
 common/physics_interpolation=true
 
 [rendering]

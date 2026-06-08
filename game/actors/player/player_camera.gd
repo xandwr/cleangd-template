@@ -1,0 +1,1 @@
+class_name PlayerCamera extends SpringArm3D

@@ -1,0 +1,1 @@
+class_name PlayerBody extends CharacterBody3D

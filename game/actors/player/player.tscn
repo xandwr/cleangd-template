@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bxp43ewfogbvo"]
+
+[ext_resource type="Script" uid="uid://by6ql11ao4jw5" path="res://game/actors/player/player.gd" id="1_c7hf2"]
+[ext_resource type="Script" uid="uid://b4ciedx5rd536" path="res://game/actors/player/player_body.gd" id="2_28fbu"]
+[ext_resource type="Script" uid="uid://dw7oh0s1wsi22" path="res://game/actors/player/player_camera.gd" id="3_em52k"]
+[ext_resource type="Script" uid="uid://d3h2rq4ys5r4s" path="res://game/actors/player/player_input.gd" id="4_p81wk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c7hf2"]
+radius = 0.2
+height = 1.8
+
+[node name="Player" type="Node" unique_id=1476584499]
+script = ExtResource("1_c7hf2")
+
+[node name="PlayerBody" type="CharacterBody3D" parent="." unique_id=1110474950]
+unique_name_in_owner = true
+script = ExtResource("2_28fbu")
+
+[node name="Collider" type="CollisionShape3D" parent="PlayerBody" unique_id=1367940772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_c7hf2")
+
+[node name="PlayerCamera" type="SpringArm3D" parent="." unique_id=384316091]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+script = ExtResource("3_em52k")
+
+[node name="Camera3D" type="Camera3D" parent="PlayerCamera" unique_id=1503227964]
+
+[node name="PlayerInput" type="Node" parent="." unique_id=1424289445]
+unique_name_in_owner = true
+script = ExtResource("4_p81wk")
