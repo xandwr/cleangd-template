@@ -3,23 +3,31 @@ class_name PlayerBodyController extends CharacterBody3D
 @export var walk_speed: float = 3.5
 @export var run_speed: float = 6.5
 @export var jump_force: float = 4.5
+@export var standing_height: float = 1.8
+@export var crouch_height: float = 1.0
+@export var crouch_down_speed_multiplier: float = 2.0 ## how much faster crouch is than stand
 
 @onready var collider: CollisionShape3D = %PlayerCollider
 @onready var camera_controller: PlayerCameraController = %PlayerCameraController
 
 var current_speed: float
+var current_height: float
 var move_input_dir: Vector2
 var move_world_dir: Vector3
+var is_crouching: bool = false
 
 
 func _ready() -> void:
 	camera_controller.body = self
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	move_input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	move_world_dir = Vector3(move_input_dir.x, 0.0, move_input_dir.y) * basis.inverse()
 	current_speed = run_speed if Input.is_action_pressed("move_sprint") else walk_speed
+	is_crouching = true if Input.is_action_pressed("move_crouch") else false
+	current_height = lerp(current_height, crouch_height, 8 * delta * crouch_down_speed_multiplier) if is_crouching else lerp(current_height, standing_height, 8 * delta)
+	collider.shape.height = current_height
 
 
 func _input(event: InputEvent) -> void:
