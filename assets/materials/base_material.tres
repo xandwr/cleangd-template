@@ -1,7 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dk5e6bixl3xs1"]
-
-[resource]
-transparency = 4
-metallic_specular = 0.0
-uv1_triplanar = true
-texture_filter = 2

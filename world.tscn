@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://vk02ic1mq5et"]
 
-[ext_resource type="Material" uid="uid://c88paehc2l11g" path="res://assets/materials/concrete_generic_1a.tres" id="1_f3sb7"]
-[ext_resource type="Script" uid="uid://usse1yx3e237" path="res://app/world_root.gd" id="2_wroot"]
+[ext_resource type="PackedScene" uid="uid://cdghrpf73ntbj" path="res://csg_cube.tscn" id="1_f3sb7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,7 +16,6 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="World" type="Node3D" unique_id=1821101037]
-script = ExtResource("2_wroot")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1806279900]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -28,6 +26,12 @@ environment = SubResource("Environment_aqk2v")
 
 [node name="Ground" type="CSGBox3D" parent="." unique_id=1701768673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-material_override = ExtResource("1_f3sb7")
 use_collision = true
 size = Vector3(32, 1, 32)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1703696824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="CSGCube" parent="." unique_id=484291589 instance=ExtResource("1_f3sb7")]
+transform = Transform3D(0.8866237, 0.46249157, 0, -0.34000674, 0.65181303, 0.6778903, 0.31351855, -0.60103357, 0.7351631, 0, 5.467205, -17.340263)
+size = Vector3(14, 4, 1)

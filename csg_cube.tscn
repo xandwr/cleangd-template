@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cdghrpf73ntbj"]
+
+[ext_resource type="Script" uid="uid://0lf22hbpvs2m" path="res://csg_cube.gd" id="1_rvxrc"]
+
+[node name="CSGCube" type="CSGBox3D" unique_id=484291589]
+script = ExtResource("1_rvxrc")
