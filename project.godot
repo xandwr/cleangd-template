@@ -11,8 +11,20 @@ config_version=5
 [application]
 
 config/name="xandbox"
+config/description="a 3d sandbox game.s"
+config/version="0.0.1"
 run/main_scene="uid://dn8un3n03vtbf"
+run/print_header=false
 config/features=PackedStringArray("4.6", "Forward Plus")
+boot_splash/show_image=false
+boot_splash/use_filter=false
+
+[display]
+
+window/size/viewport_width=2560
+window/size/viewport_height=1440
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [input]
 
@@ -59,7 +71,11 @@ interact={
 
 [physics]
 
+common/physics_ticks_per_second=120
+common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
+3d/default_gravity=25.0
+common/physics_interpolation=true
 
 [rendering]
 

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bjix421c6uf5m"]
 
 [ext_resource type="Material" uid="uid://b042qg0b0wui4" path="res://assets/materials/concrete_stucco_1a.tres" id="1_1s6sj"]
+[ext_resource type="PackedScene" uid="uid://dr6w11tevprj8" path="res://assets/instances/player/player.tscn" id="2_2tgfu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1s6sj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -29,3 +30,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = ExtResource("1_1s6sj")
 use_collision = true
 size = Vector3(128, 1, 128)
+
+[node name="Player" parent="." unique_id=1041866101 instance=ExtResource("2_2tgfu")]
