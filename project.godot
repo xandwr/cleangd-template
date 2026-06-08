@@ -16,6 +16,7 @@ config/version="0.0.1"
 run/main_scene="uid://vk02ic1mq5et"
 run/print_header=false
 config/features=PackedStringArray("4.6", "Forward Plus")
+run/max_fps=144
 boot_splash/show_image=false
 boot_splash/use_filter=false
 
@@ -25,7 +26,6 @@ window/size/viewport_width=2560
 window/size/viewport_height=1440
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/vsync/vsync_mode=0
 
 [input]
 
