@@ -27,6 +27,10 @@ window/size/viewport_height=1440
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[dotnet]
+
+project/assembly_name="xandbox"
+
 [input]
 
 move_left={

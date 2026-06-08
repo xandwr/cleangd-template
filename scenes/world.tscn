@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://vk02ic1mq5et"]
 
-[ext_resource type="PackedScene" uid="uid://cdghrpf73ntbj" path="res://csg_cube.tscn" id="1_f3sb7"]
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,14 +22,6 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2105210067]
 environment = SubResource("Environment_aqk2v")
 
-[node name="Ground" type="CSGBox3D" parent="." unique_id=1701768673]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-use_collision = true
-size = Vector3(32, 1, 32)
-
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1703696824]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="CSGCube" parent="." unique_id=484291589 instance=ExtResource("1_f3sb7")]
-transform = Transform3D(0.8866237, 0.46249157, 0, -0.34000674, 0.65181303, 0.6778903, 0.31351855, -0.60103357, 0.7351631, 0, 5.467205, -17.340263)
-size = Vector3(14, 4, 1)
+fov = 90.0
