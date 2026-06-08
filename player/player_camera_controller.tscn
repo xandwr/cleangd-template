@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cetof6umrgbm3"]
+
+[ext_resource type="Script" uid="uid://c2gxykb07v04c" path="res://player/player_camera_controller.gd" id="1_khish"]
+
+[node name="PlayerCameraController" type="SpringArm3D" unique_id=1583482058]
+script = ExtResource("1_khish")
+
+[node name="PlayerCamera" type="Camera3D" parent="." unique_id=809661891]
+unique_name_in_owner = true

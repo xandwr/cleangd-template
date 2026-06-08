@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dg683upulaugr"]
+
+[ext_resource type="PackedScene" uid="uid://prqx07yvwp2g" path="res://player/player_body_controller.tscn" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://djupwn4k278ie" path="res://player/player.gd" id="1_rkbax"]
+
+[node name="Player" type="Node" unique_id=1460220683]
+script = ExtResource("1_rkbax")
+
+[node name="PlayerBodyController" parent="." unique_id=1380954601 instance=ExtResource("1_oul6g")]
+unique_name_in_owner = true

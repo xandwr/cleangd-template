@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://dn8un3n03vtbf"]
-
-[ext_resource type="Script" uid="uid://4fb26wjvm8fl" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://bjix421c6uf5m" path="res://assets/worlds/debug_world/debug_world.tscn" id="2_0xm2m"]
-
-[node name="Main" type="Node" unique_id=1678288245]
-script = ExtResource("1_ig7tw")
-
-[node name="DebugWorld" parent="." unique_id=899428101 instance=ExtResource("2_0xm2m")]

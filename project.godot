@@ -13,7 +13,6 @@ config_version=5
 config/name="xandbox"
 config/description="a 3d sandbox game.s"
 config/version="0.0.1"
-run/main_scene="uid://dn8un3n03vtbf"
 run/print_header=false
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/show_image=false
