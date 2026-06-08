@@ -17,8 +17,9 @@ func _ready() -> void:
 	player_input.mouse_delta_changed.connect(player_camera.add_look_delta)
 	player_input.pause_pressed.connect(_on_pause_pressed)
 
-	# Movement is camera-relative, so the body needs to know where it's looking.
-	player_body.camera = player_camera
+	# Look splits: the camera pitches itself and hands yaw to the body, which turns
+	# to face it (carrying the camera) and resolves movement relative to that facing.
+	player_camera.yaw_changed.connect(player_body.set_yaw)
 
 	# Gameplay owns the cursor while the player is active; the seam re-captures
 	# whenever nothing (pause, a dialog) is holding it free.

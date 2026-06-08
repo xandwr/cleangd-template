@@ -20,13 +20,13 @@ script = ExtResource("2_28fbu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_c7hf2")
 
-[node name="PlayerCamera" type="SpringArm3D" parent="." unique_id=384316091]
+[node name="PlayerCamera" type="SpringArm3D" parent="PlayerBody" unique_id=384316091]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 spring_length = 0.0
 script = ExtResource("3_em52k")
 
-[node name="Camera3D" type="Camera3D" parent="PlayerCamera" unique_id=1503227964]
+[node name="Camera3D" type="Camera3D" parent="PlayerBody/PlayerCamera" unique_id=1503227964]
 
 [node name="PlayerInput" type="Node" parent="." unique_id=1424289445]
 unique_name_in_owner = true

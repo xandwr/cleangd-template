@@ -25,7 +25,7 @@ var _crouching := false
 func _physics_process(_delta: float) -> void:
 	# Poll movement on the physics tick since PlayerBody is a CharacterBody3D.
 	var direction := Input.get_vector(
-		"move_left", "move_right", "move_forward", "move_backward")
+		"move_left", "move_right", "move_backward", "move_forward")
 	if direction != _move_direction:
 		_move_direction = direction
 		move_direction_changed.emit(direction)

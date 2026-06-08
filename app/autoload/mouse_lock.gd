@@ -25,6 +25,11 @@ enum UnlockKind { VISIBLE, CONFINED }
 var _capture_wanted := false
 var _holders: Array[MouseLockHandle] = []
 var _focused := true
+## Set once the autoload begins tearing down. Handles finalizing during engine
+## shutdown check this and skip calling back in: by predelete the node's members
+## are already unwinding, so _drop would fault even though is_instance_valid is
+## still true for the node itself.
+var _shutting_down := false
 
 
 func _ready() -> void:
@@ -51,7 +56,7 @@ func release_capture() -> void:
 ## it free; release() it (or drop the reference) to withdraw the request. The
 ## cursor re-captures only when no handle remains and gameplay still wants it.
 func request_unlock(reason: String = "") -> MouseLockHandle:
-	var handle := MouseLockHandle.new(reason)
+	var handle := MouseLockHandle.new(self, reason)
 	_holders.append(handle)
 	_apply()
 	return handle
@@ -61,6 +66,12 @@ func request_unlock(reason: String = "") -> MouseLockHandle:
 ## Useful for look code that should ignore motion while the cursor is loose.
 func is_captured() -> bool:
 	return _capture_wanted and _holders.is_empty() and _focused
+
+
+## True once the autoload has begun tearing down. Handles consult this from their
+## predelete so they don't call _drop into a half-freed node.
+func is_shutting_down() -> bool:
+	return _shutting_down
 
 
 func _drop(handle: MouseLockHandle) -> void:
@@ -93,3 +104,9 @@ func _notification(what: int) -> void:
 		NOTIFICATION_APPLICATION_FOCUS_IN:
 			_focused = true
 			_apply()
+		NOTIFICATION_PREDELETE:
+			# Engine shutdown. Flag teardown and release our hold so handles that
+			# finalize after us short-circuit instead of calling _drop into a
+			# node whose members are already unwinding.
+			_shutting_down = true
+			_holders.clear()

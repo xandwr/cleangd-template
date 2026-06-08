@@ -1,6 +1,8 @@
-## Physical body of the Player. Receives movement intent as setters (driven by
-## PlayerInput via the Player root) and resolves it into camera-relative motion
-## every physics tick. Knows nothing about input actions or events.
+## Physical body of the Player. Receives movement and look-yaw intent as setters
+## (driven by PlayerInput and PlayerCamera via the Player root) and resolves them
+## into motion every physics tick. The body owns yaw, so its child camera turns
+## with it; movement is relative to the body's own facing. Knows nothing about
+## input actions or events.
 class_name PlayerBody extends CharacterBody3D
 
 @export var walk_speed := 5.0
@@ -8,9 +10,6 @@ class_name PlayerBody extends CharacterBody3D
 @export var crouch_speed := 2.5
 @export var jump_velocity := 5.5
 @export var acceleration := 12.0
-
-## Set by Player so movement can be resolved relative to where we're looking.
-var camera: Node3D
 
 var _move_direction := Vector2.ZERO
 var _sprinting := false
@@ -22,6 +21,11 @@ var _jump_queued := false
 
 func set_move_direction(direction: Vector2) -> void:
 	_move_direction = direction
+
+
+## Turn to face the look yaw (radians). The camera, parented here, follows.
+func set_yaw(yaw: float) -> void:
+	rotation.y = yaw
 
 
 func set_sprinting(active: bool) -> void:
@@ -55,14 +59,14 @@ func _physics_process(delta: float) -> void:
 
 
 ## Converts the 2D move intent into a world-space planar velocity, relative to the
-## camera's yaw when one is bound and falling back to world axes otherwise.
+## body's own facing (which look-yaw keeps pointed where the camera looks).
 func _planar_velocity() -> Vector3:
 	if _move_direction == Vector2.ZERO:
 		return Vector3.ZERO
 
-	var look_basis := camera.global_transform.basis if camera else global_transform.basis
-	var forward := -look_basis.z
-	var right := look_basis.x
+	var facing := global_transform.basis
+	var forward := -facing.z
+	var right := facing.x
 	var direction := (right * _move_direction.x + forward * _move_direction.y)
 	direction.y = 0.0
 	direction = direction.normalized()
