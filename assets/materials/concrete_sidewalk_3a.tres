@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c0mfq8ooxebyf"]
+
+[ext_resource type="Texture2D" uid="uid://w67dmwd08qn3" path="res://assets/textures/ConcreteSidewalk3a.png" id="1_u16gf"]
+
+[resource]
+albedo_texture = ExtResource("1_u16gf")
+metallic_specular = 0.0
+uv1_triplanar = true
+texture_filter = 2

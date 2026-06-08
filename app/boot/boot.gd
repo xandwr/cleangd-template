@@ -1,6 +1,4 @@
-extends Node
+class_name Boot extends Node
 
-
-func _ready() -> void:
-	if OS.is_debug_build():
-		print("CleanGD Template loaded.")
+@onready var sun: DirectionalLight3D = %Sun
+@onready var environment: WorldEnvironment = %Environment

@@ -23,6 +23,7 @@ shape = SubResource("CapsuleShape3D_c7hf2")
 [node name="PlayerCamera" type="SpringArm3D" parent="." unique_id=384316091]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+spring_length = 0.0
 script = ExtResource("3_em52k")
 
 [node name="Camera3D" type="Camera3D" parent="PlayerCamera" unique_id=1503227964]
@@ -30,3 +31,16 @@ script = ExtResource("3_em52k")
 [node name="PlayerInput" type="Node" parent="." unique_id=1424289445]
 unique_name_in_owner = true
 script = ExtResource("4_p81wk")
+
+[node name="Hud" type="CanvasLayer" parent="." unique_id=2049755656]
+
+[node name="Crosshair" type="Label" parent="Hud" unique_id=1727414004]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
