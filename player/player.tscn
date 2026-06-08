@@ -9,5 +9,17 @@ script = ExtResource("1_rkbax")
 [node name="PlayerBodyController" parent="." unique_id=1380954601 instance=ExtResource("1_oul6g")]
 unique_name_in_owner = true
 
+[node name="Hud" type="CanvasLayer" parent="." unique_id=1515408017]
+
+[node name="Crosshair" type="Label" parent="Hud" unique_id=709590578]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [editable path="PlayerBodyController"]
 [editable path="PlayerBodyController/PlayerCameraController"]
