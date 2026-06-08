@@ -90,7 +90,6 @@ fire_secondary={
 
 [physics]
 
-3d/run_on_separate_thread=true
 common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
 3d/default_gravity=20.0

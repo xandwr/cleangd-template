@@ -34,6 +34,17 @@ class_name PlayerBody extends CharacterBody3D
 @export var air_accel := 20.0
 @export var air_speed_cap := 1.2
 
+## Crouch geometry. The standing capsule is stand_height tall with its feet at the
+## body origin (y=0); crouch_height is the shrunk size. eye_height is where the
+## camera sits standing, crouch_eye_height where it sits fully crouched. Source-like
+## crouch-jumping comes from *where* the collider anchors per state (see _apply_crouch).
+@export var stand_height := 1.8
+@export var crouch_height := 1.0
+@export var eye_height := 1.6
+@export var crouch_eye_height := 0.9
+## How fast the crouch transition eases, in 0..1 units per second (9 ≈ 0.11s full).
+@export var crouch_speed_rate := 9.0
+
 enum MoveState { GROUND, AIR }
 
 var _move_direction := Vector2.ZERO
@@ -42,7 +53,33 @@ var _crouching := false
 var _jump_queued := false
 var _state := MoveState.GROUND
 
+## 0 = fully standing, 1 = fully crouched. Lerped toward the held intent each tick;
+## the collider height, anchor, and eye height all read off this single value.
+var _crouch_t := 0.0
+## The state the collider anchor was last positioned for. Tracked so a ground<->air
+## transition re-anchors even when _crouch_t isn't moving (e.g. jumping while fully
+## crouched needs the feet to tuck up).
+var _anchor_state := MoveState.GROUND
+
 @onready var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+@onready var _collider: CollisionShape3D = $Collider
+@onready var _camera: Node3D = %PlayerCamera
+
+## Live capsule we resize for crouch, and its radius captured once. Duplicated so
+## resizing mutates this instance, not the shared scene sub-resource (which would
+## leak crouch state across reloads / other players). Radius is read into a plain
+## float because the headroom probe must not depend on reading it back off the
+## live shape mid-physics, where Jolt can hand back a zero before the rebuild.
+var _capsule: CapsuleShape3D
+var _radius := 0.2
+
+
+func _ready() -> void:
+	var source := _collider.shape as CapsuleShape3D
+	_radius = source.radius
+	_capsule = source.duplicate()
+	_collider.shape = _capsule
+	_apply_crouch()
 
 
 func set_move_direction(direction: Vector2) -> void:
@@ -70,6 +107,8 @@ func jump() -> void:
 
 func _physics_process(delta: float) -> void:
 	_state = MoveState.GROUND if is_on_floor() else MoveState.AIR
+
+	_update_crouch(delta)
 
 	var wish_dir := _wish_direction()
 
@@ -106,6 +145,60 @@ func _ground_move(wish_dir: Vector3, delta: float) -> void:
 ## while you turn still adds speed sideways. That asymmetry is air-strafing.
 func _air_move(wish_dir: Vector3, delta: float) -> void:
 	_accelerate(wish_dir, _current_speed() * air_speed_cap, air_accel, delta)
+
+
+## Ease _crouch_t toward the held intent, then push it into the collider/camera.
+## Standing back up is gated on headroom: if something is directly above, we stay
+## crouched (cap _crouch_t) until it clears, so we never grow into geometry.
+func _update_crouch(delta: float) -> void:
+	var target := 1.0 if _crouching else 0.0
+	if target < _crouch_t and not _has_headroom():
+		target = _crouch_t
+
+	# Re-apply on any height change, and on a ground<->air flip so the anchor swaps
+	# even while fully crouched (height steady) — that flip is the crouch-jump tuck.
+	var height_changing := not is_equal_approx(_crouch_t, target)
+	if height_changing:
+		_crouch_t = move_toward(_crouch_t, target, crouch_speed_rate * delta)
+	if height_changing or _state != _anchor_state:
+		_apply_crouch()
+
+
+## Map _crouch_t to the live capsule height, its anchor, and the eye height.
+##
+## The anchor is the whole crouch-jump trick. On the ground the feet stay planted
+## (collider bottom at y=0), so crouching lowers the head. In the air we anchor the
+## *head* instead: the feet tuck up toward it, lifting the collider's bottom off the
+## ground. That raised floor is what lets a crouch in mid-jump clear a ledge you'd
+## otherwise clip. The eye follows the head either way so the view never pops.
+func _apply_crouch() -> void:
+	var height := lerpf(stand_height, crouch_height, _crouch_t)
+	_capsule.height = height
+
+	var feet_anchored := _state == MoveState.GROUND
+	var center := height * 0.5 if feet_anchored else stand_height - height * 0.5
+	_collider.position.y = center
+	_anchor_state = _state
+
+	_camera.position.y = lerpf(eye_height, crouch_eye_height, _crouch_t)
+
+
+## Is the space above clear enough to stand back up? Tests a full-height standing
+## capsule, centered where it would sit with feet planted, against the body's own
+## collision mask. Empty result means nothing's in the way. Excludes self so we
+## don't collide with our own crouched shape.
+func _has_headroom() -> bool:
+	var probe := CapsuleShape3D.new()
+	probe.radius = _radius
+	probe.height = stand_height
+
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = probe
+	query.transform = global_transform.translated(Vector3(0.0, stand_height * 0.5, 0.0))
+	query.collision_mask = collision_mask
+	query.exclude = [get_rid()]
+
+	return get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty()
 
 
 ## Quake friction: scale planar velocity down by a drop proportional to current
