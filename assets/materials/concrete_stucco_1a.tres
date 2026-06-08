@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b042qg0b0wui4"]
+
+[ext_resource type="Texture2D" uid="uid://ntjcpjst8mty" path="res://assets/textures/ConcreteStucco1a.png" id="1_51h8r"]
+
+[resource]
+albedo_texture = ExtResource("1_51h8r")
+metallic_specular = 0.0
+uv1_triplanar = true
+texture_filter = 2
