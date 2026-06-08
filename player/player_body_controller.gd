@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	move_world_dir = Vector3(move_input_dir.x, 0.0, move_input_dir.y) * basis.inverse()
 	current_speed = lerp(current_speed, run_speed, 8 * delta) if Input.is_action_pressed("move_sprint") else lerp(current_speed, walk_speed, 8 * delta)
 	is_crouching = true if Input.is_action_pressed("move_crouch") else false
-	current_speed = lerp(current_speed, crouch_speed, 8 * delta) if is_crouching else current_speed
+	current_speed = lerp(current_speed, crouch_speed, 8 * delta) if is_crouching and is_on_floor() else current_speed
 	current_height = lerp(current_height, crouch_height, 8 * delta * crouch_down_speed_multiplier) if is_crouching else lerp(current_height, standing_height, 8 * delta)
 	collider.shape.height = current_height
 
