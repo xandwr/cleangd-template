@@ -8,6 +8,27 @@ namespace Xandbox.Player;
 [GlobalClass]
 public partial class PlayerBody : CharacterBody3D
 {
+    /// Spring-arm length per view: collapsed onto the head for first-person,
+    /// pulled back behind the body for third-person.
+    public enum CameraPerspective { FirstPerson, ThirdPerson }
+
+    private CameraPerspective _perspective = CameraPerspective.FirstPerson;
+
+    [Export]
+    public CameraPerspective Perspective
+    {
+        get => _perspective;
+        set
+        {
+            _perspective = value;
+            ApplyPerspective();
+        }
+    }
+
+    /// Distance the arm pulls back in third-person.
+    [Export]
+    public float ThirdPersonDistance = 3.0f;
+
     [Export]
     public float Speed = 5.0f;
 
@@ -26,7 +47,17 @@ public partial class PlayerBody : CharacterBody3D
     public override void _Ready()
     {
         _cameraArm = GetNode<SpringArm3D>("%CameraArm");
+        ApplyPerspective();
         Input.MouseMode = Input.MouseModeEnum.Captured;
+    }
+
+    private void ApplyPerspective()
+    {
+        if (_cameraArm == null)
+            return;
+        _cameraArm.SpringLength = _perspective == CameraPerspective.ThirdPerson
+            ? ThirdPersonDistance
+            : 0.0f;
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -47,6 +78,11 @@ public partial class PlayerBody : CharacterBody3D
             Input.MouseMode = Input.MouseMode == Input.MouseModeEnum.Captured
                 ? Input.MouseModeEnum.Visible
                 : Input.MouseModeEnum.Captured;
+
+        if (Input.IsActionJustPressed("toggle_perspective"))
+            Perspective = _perspective == CameraPerspective.FirstPerson
+                ? CameraPerspective.ThirdPerson
+                : CameraPerspective.FirstPerson;
     }
 
     public override void _PhysicsProcess(double delta)
