@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://1446fl1q7fhe"]
+
+[ext_resource type="PackedScene" uid="uid://sa31nrpgdhph" path="res://scenes/player/player_body.tscn" id="1_8afob"]
+
+[node name="Player" type="Node" unique_id=953746940]
+
+[node name="PlayerBody" parent="." unique_id=334752628 instance=ExtResource("1_8afob")]
+unique_name_in_owner = true

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vk02ic1mq5et"]
 
 [ext_resource type="PackedScene" uid="uid://d0splx00f7joy" path="res://scenes/level_test/level_test.tscn" id="1_nnsk1"]
+[ext_resource type="PackedScene" uid="uid://1446fl1q7fhe" path="res://scenes/player/player.tscn" id="2_rwgxs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -25,3 +26,5 @@ shadow_enabled = true
 environment = SubResource("Environment_aqk2v")
 
 [node name="LevelTest" parent="." unique_id=437974738 instance=ExtResource("1_nnsk1")]
+
+[node name="Player" parent="." unique_id=953746940 instance=ExtResource("2_rwgxs")]
