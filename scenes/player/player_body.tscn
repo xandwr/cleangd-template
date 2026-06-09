@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://sa31nrpgdhph"]
+
+[ext_resource type="Script" uid="uid://cc17no7xv6u62" path="res://scenes/player/PlayerBody.cs" id="1_pbody"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x7p2l"]
+radius = 0.2
+height = 1.8
+
+[node name="PlayerBody" type="CharacterBody3D" unique_id=334752628]
+script = ExtResource("1_pbody")
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=793249201]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_x7p2l")
+
+[node name="CameraArm" type="SpringArm3D" parent="." unique_id=1292079753]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+spring_length = 0.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraArm" unique_id=1007811078]
+unique_name_in_owner = true
