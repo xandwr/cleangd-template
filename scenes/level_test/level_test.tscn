@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://d0splx00f7joy"]
 
 [ext_resource type="Script" uid="uid://dcoloby3sqyqh" path="res://scenes/level_test/LevelTest.cs" id="2_8nebw"]
+[ext_resource type="Material" uid="uid://bler0o1wx2bud" path="res://assets/materials/wood_generic_1a.tres" id="3_1l5lj"]
 [ext_resource type="Script" uid="uid://bl727eaxnqvoc" path="res://csg/CSGBox.cs" id="3_8nebw"]
+[ext_resource type="Material" uid="uid://cspiwami1ikgl" path="res://assets/materials/wood_cladding_2b.tres" id="4_1rwcb"]
 [ext_resource type="Script" uid="uid://bly3tc23v7h03" path="res://scenes/level_test/Elevator.cs" id="4_8nebw"]
+[ext_resource type="Material" uid="uid://c5onusfr0sfm1" path="res://assets/materials/wood_beams_2d.tres" id="6_84xtj"]
 
 [sub_resource type="Curve3D" id="Curve3D_ear38"]
 _data = {
@@ -10,9 +13,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmosd"]
-albedo_color = Color(1, 0, 1, 1)
 
 [node name="LevelTest" type="Node3D" unique_id=437974738]
 script = ExtResource("2_8nebw")
@@ -36,6 +36,7 @@ metadata/_custom_type_script = "uid://bl727eaxnqvoc"
 
 [node name="Floor" type="CSGBox3D" parent="Static" unique_id=101862963]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("3_1l5lj")
 use_collision = true
 size = Vector3(16, 1, 16)
 script = ExtResource("3_8nebw")
@@ -43,6 +44,7 @@ metadata/_custom_type_script = "uid://bl727eaxnqvoc"
 
 [node name="Wall" type="CSGBox3D" parent="Static" unique_id=943748109]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -11.5)
+material_override = ExtResource("4_1rwcb")
 use_collision = true
 size = Vector3(16, 7, 9)
 script = ExtResource("3_8nebw")
@@ -50,6 +52,7 @@ metadata/_custom_type_script = "uid://bl727eaxnqvoc"
 
 [node name="Wall2" type="CSGBox3D" parent="Static" unique_id=1136094766]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 7.5)
+material_override = ExtResource("4_1rwcb")
 use_collision = true
 size = Vector3(16, 6, 1)
 script = ExtResource("3_8nebw")
@@ -57,6 +60,7 @@ metadata/_custom_type_script = "uid://bl727eaxnqvoc"
 
 [node name="Wall3" type="CSGBox3D" parent="Static" unique_id=498832788]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 3, 0)
+material_override = ExtResource("4_1rwcb")
 use_collision = true
 size = Vector3(1, 6, 14)
 script = ExtResource("3_8nebw")
@@ -64,6 +68,7 @@ metadata/_custom_type_script = "uid://bl727eaxnqvoc"
 
 [node name="Wall4" type="CSGBox3D" parent="Static" unique_id=1376894114]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 3, 0)
+material_override = ExtResource("4_1rwcb")
 use_collision = true
 size = Vector3(1, 6, 14)
 script = ExtResource("3_8nebw")
@@ -81,7 +86,7 @@ script = ExtResource("4_8nebw")
 
 [node name="PinkCube" type="CSGBox3D" parent="Paths/PinkElevatorPath/Elevator" unique_id=278342262]
 transform = Transform3D(1, 4.371139e-08, 4.3711385e-08, 4.3711385e-08, -4.3711385e-08, -1, -4.3711392e-08, 1, -4.371139e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_lmosd")
+material_override = ExtResource("6_84xtj")
 use_collision = true
 size = Vector3(3, 1, 3)
 script = ExtResource("3_8nebw")

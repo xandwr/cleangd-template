@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c5onusfr0sfm1"]
+
+[ext_resource type="Texture2D" uid="uid://bobabgj0emdym" path="res://assets/textures/WoodBeams2d.png" id="1_y0mq0"]
+
+[resource]
+transparency = 4
+albedo_texture = ExtResource("1_y0mq0")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+texture_filter = 2
