@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d0splx00f7joy"]
+
+[ext_resource type="Script" uid="uid://dcoloby3sqyqh" path="res://scenes/level_test/LevelTest.cs" id="2_8nebw"]
+[ext_resource type="Script" uid="uid://bl727eaxnqvoc" path="res://csg/CSGBox.cs" id="3_8nebw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmosd"]
+albedo_color = Color(1, 0, 1, 1)
+
+[node name="LevelTest" type="Node3D" unique_id=437974738]
+script = ExtResource("2_8nebw")
+metadata/_custom_type_script = "uid://gpbta4tstgt7"
+
+[node name="PinkCube" type="CSGBox3D" parent="." unique_id=278342262]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5)
+material_override = SubResource("StandardMaterial3D_lmosd")
+script = ExtResource("3_8nebw")
+metadata/_custom_type_script = "uid://bl727eaxnqvoc"
+
+[node name="Static" type="Node" parent="." unique_id=316226273]
+
+[node name="Floor" type="CSGBox3D" parent="Static" unique_id=101862963]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(16, 1, 16)
+script = ExtResource("3_8nebw")
+metadata/_custom_type_script = "uid://bl727eaxnqvoc"
+
+[node name="Wall" type="CSGBox3D" parent="Static" unique_id=943748109]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -7.5)
+size = Vector3(16, 6, 1)
+script = ExtResource("3_8nebw")
+metadata/_custom_type_script = "uid://bl727eaxnqvoc"
+
+[node name="Wall2" type="CSGBox3D" parent="Static" unique_id=1136094766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 7.5)
+size = Vector3(16, 6, 1)
+script = ExtResource("3_8nebw")
+metadata/_custom_type_script = "uid://bl727eaxnqvoc"
+
+[node name="Wall3" type="CSGBox3D" parent="Static" unique_id=498832788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 3, 0)
+size = Vector3(1, 6, 14)
+script = ExtResource("3_8nebw")
+metadata/_custom_type_script = "uid://bl727eaxnqvoc"
+
+[node name="Wall4" type="CSGBox3D" parent="Static" unique_id=1376894114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 3, 0)
+size = Vector3(1, 6, 14)
+script = ExtResource("3_8nebw")
+metadata/_custom_type_script = "uid://bl727eaxnqvoc"

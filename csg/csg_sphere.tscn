@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://cye5nlemwymdy"]
-
-[node name="CSGSphere" type="CSGSphere3D" unique_id=827399579]
-use_collision = true

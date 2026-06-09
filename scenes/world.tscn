@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://vk02ic1mq5et"]
 
-[ext_resource type="PackedScene" uid="uid://cfvajx64nphoe" path="res://csg/csg_level.tscn" id="1_nnsk1"]
-[ext_resource type="Script" uid="uid://bl727eaxnqvoc" path="res://csg/CSGBox.cs" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://d0splx00f7joy" path="res://scenes/level_test/level_test.tscn" id="1_nnsk1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -26,14 +25,9 @@ shadow_enabled = true
 environment = SubResource("Environment_aqk2v")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1703696824]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)
 fov = 90.0
+near = 0.01
+far = 128.0
 
-[node name="CSGLevel" parent="." unique_id=1930729394 instance=ExtResource("1_nnsk1")]
-
-[node name="HardGround" type="CSGBox3D" parent="." unique_id=1609930134]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-use_collision = true
-size = Vector3(32, 1, 32)
-script = ExtResource("2_rwgxs")
-metadata/_custom_type_script = "uid://bl727eaxnqvoc"
+[node name="LevelTest" parent="." unique_id=437974738 instance=ExtResource("1_nnsk1")]
