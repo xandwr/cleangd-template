@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cfvajx64nphoe"]
+
+[ext_resource type="Script" uid="uid://gpbta4tstgt7" path="res://csg/CSGLevel.cs" id="1_swo22"]
+[ext_resource type="PackedScene" uid="uid://caq42myuu7qao" path="res://csg/csg_box.tscn" id="2_xfryr"]
+
+[node name="CSGLevel" type="Node3D" unique_id=1930729394]
+script = ExtResource("1_swo22")
+
+[node name="CSGBox" parent="." unique_id=1049954047 instance=ExtResource("2_xfryr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -7)
